@@ -1,0 +1,45 @@
+/*Grid guides: https://css-tricks.com/snippets/css/complete-guide-grid/*/
+
+.rosado {
+    background-color: pink;
+    width: 1fr;
+    height: 150px;
+}
+.verde {
+    background-color: green;
+    width: 1fr;
+    height: 150px;
+}
+.azul {
+    background-color: blue;
+    width: 1fr;
+    height: 40px;
+}
+.rojo {
+    background-color: red;
+}
+.morado {
+    background-color: purple;
+}
+.gris {
+    background-color: gray;
+    width: 1fr;
+    height: 100px;
+}
+
+@media only screen and (min-width:501px) and (max-width:750px) {
+    body{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr)
+    }
+    .rosado {
+        width: 1fr;
+        height: 100px;
+    }
+    .verde,.azul,.rojo{
+        display: flex;
+        grid-template-columns: 1fr 1fr 1fr;
+        aspect-ratio: 1 / 1;
+    }
+
+}

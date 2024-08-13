@@ -21,6 +21,10 @@
             background-color: #051B54;
         }
 
+        .navbar-brand {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
         .login {
             border-radius: 20px;
             background-color: #FFFFFF33;
@@ -33,11 +37,25 @@
 
         section {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: #62DAD3;
+            border-radius: 10px;
         }
 
         .formulario {
             box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.50);
             border-radius: 15px;
+            color: #051B54;
+        }
+
+        form .nav-link,
+        form .formulario-sel {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .formulario-sel {
+            background-color: transparent;
+            border: none;
         }
     </style>
     <!--CSS-->
@@ -94,20 +112,17 @@
     <!--Nabvar-->
     <!--jumbotron-->
     <section>
-        <div class="bg-info rounded-3 p">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-8">
-                        <h1 class=" p-5 pb-0">¡Vacaciones de verano!</h1>
-                        <h4 class="ps-5">Vuela por chile y sudamérica con hasta 40% de descuento</h4>
-                        <p class="pt-3 ps-5">Encuentra paquetes, hoteles, seguros, y arriendo de autos en AeroVia
-                            Express</p>
-                        <a class="ps-5" href="#">Compra aquí</a>
-                    </div>
-                    <div class="col pe-1">
-                        <img class="img-fluid" src="MATERIAL COMPLEMENTARIO EVALUACIÓN M6/polynesia.jpg"
-                            alt="Polynesia">
-                    </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-8">
+                    <h1 class=" p-5 pb-0">¡Vacaciones de verano!</h1>
+                    <h4 class="ps-5">Vuela por chile y sudamérica con hasta 40% de descuento</h4>
+                    <p class="pt-3 ps-5">Encuentra paquetes, hoteles, seguros, y arriendo de autos en AeroVia
+                        Express</p>
+                    <a class="ps-5" href="#">Compra aquí</a>
+                </div>
+                <div class="col pe-1">
+                    <img class="img-fluid" src="MATERIAL COMPLEMENTARIO EVALUACIÓN M6/polynesia.jpg" alt="Polynesia">
                 </div>
             </div>
         </div>
@@ -116,6 +131,7 @@
     <!--Form-->
     <form class="pt-3 px-2" action="">
         <div class="container-fluid formulario">
+            <!--Navbar-->
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Vuelos</a>
@@ -136,48 +152,40 @@
                     <a class="nav-link" href="#">Upgrade</a>
                 </li>
             </ul>
+            <!--Navbar-->
+            <!--Select/Options-->
             <div class="row">
-                <div class="col">
-                    <div class="dropdown pt-4">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Ida y Vuelta
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Solo Ida</a></li>
-                            <li><a class="dropdown-item" href="#">Solo Vuelta</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="dropdown pt-4">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Economy
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Standard</a></li>
-                            <li><a class="dropdown-item" href="#">Premium</a></li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <div class="dropdown pt-4">
-                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                1 pasajero
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">2 pasajeros</a></li>
-                                <li><a class="dropdown-item" href="#">3 pasajeros</a></li>
-                                <li><a class="dropdown-item" href="#">4 pasajeros</a></li>
-                                <li><a class="dropdown-item" href="#">5 pasajeros</a></li>
-                                <li><a class="dropdown-item" href="#">6 pasajeros</a></li>
-                            </ul>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col">
+                            <select class="formulario-sel mt-4" id="idaVueltaSelect">
+                                <option value="ida-vuelta">Ida y Vuelta</option>
+                                <option value="solo-ida">Solo Ida</option>
+                                <option value="solo-vuelta">Solo Vuelta</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="formulario-sel mt-4" id="classSelect">
+                                <option value="economy">Economy</option>
+                                <option value="standard">Standard</option>
+                                <option value="premium">Premium</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="formulario-sel mt-4" id="passengerSelect">
+                                <option value="1">1 pasajero</option>
+                                <option value="2">2 pasajeros</option>
+                                <option value="3">3 pasajeros</option>
+                                <option value="4">4 pasajeros</option>
+                                <option value="5">5 pasajeros</option>
+                                <option value="6">6 pasajeros</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <!--Select/Options-->
+            <!--Inputs-->
             <div class="row">
                 <div class="col p-4">
                     <input type="text" class="form-control" placeholder="Origen">
@@ -201,6 +209,7 @@
                     <button class="btn btn-danger" disabled>buscar</button>
                 </div>
             </div>
+            <!--Inputs-->
         </div>
     </form>
     <!--Form-->

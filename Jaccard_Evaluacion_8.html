@@ -29,15 +29,17 @@
         }
 
         let users = [user01, user02, user03]
-        //Identificador de usuario
+
+        //Función de identificador de usuario
 
         function Authenticator() {
             while (true) {
-                let inputUser = prompt("Ingrese su usuario: ")
-                let inputPass = prompt("Ingrese su contraseña: ")
+                alert("Bienvenido a Banca en Línea");
+                let inputUser = prompt("Ingrese su usuario: ");
+                let inputPass = prompt("Ingrese su contraseña: ");
                 for (let i = 0; i < users.length; i++) {
                     if (users[i].username === inputUser && users[i].password === inputPass) {
-                        alert("Bienvenido a Banca en Línea")
+                        alert(`Bienvenido ${users[i].username}`);
                         return users[i]
                     }
                 }
@@ -45,15 +47,34 @@
             }
         }
 
-        
         //Función de inicio de sesión. Retorna objeto users.username/password/balance
-        let authUser = Authenticator()
 
         function Menu() {
-            
+            let opcion;
+            do {
+                opcion = prompt("Menú principal:\n1) Ver saldo\n2) Realizar giro\n3) Realizar depósito\n4) Salir");
+                if (opcion == 1) {
+                    alert(`Su saldo actual es: $${authUser.balance} pesos`);
+                } else if (opcion == 2) {
+                    let withdraw = parseFloat(prompt(`Su saldo actual es: $${authUser.balance} pesos\nIngrese el monto que desea girar:`));
+                    authUser.balance -= withdraw
+                    alert(`Giro realizado. Su nuevo saldo es: $${authUser.balance} pesos`);
+                } else if (opcion == 3) {
+                    let deposit = parseFloat(prompt(`Su saldo actual es: $${authUser.balance} pesos\nIngrese el monto que desea depositar:`));
+                    authUser.balance += deposit
+                    alert(`Deposito realizado. Su nuevo saldo es: $${authUser.balance} pesos`);
+                } else if (opcion == 4 || opcion == null) {
+                    alert("Gracias por preferir nuestros servicios.");
+                } else {
+                    alert("Opción inválida.");
+                }
+            } while (opcion != 4 && opcion !== null);
         }
 
-        //alert(`Bienvenido ${users[i].username}, tu balance es de ${users[i].balance} pesos`);
+        //Llamados de funciones
+
+        let authUser = Authenticator()
+        Menu()
 
 
     </script>

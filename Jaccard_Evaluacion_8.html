@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        //Usuarios
+        let user01 = {
+            username: "Juan",
+            password: "123456",
+            balance: 20,
+        }
+        let user02 = {
+            username: "Carla",
+            password: "321654",
+            balance: 999,
+        }
+        let user03 = {
+            username: "Ramiro",
+            password: "654321",
+            balance: 1666,
+        }
+
+        let users = [user01, user02, user03]
+        //Identificador de usuario
+
+        function Authenticator() {
+            while (true) {
+                let inputUser = prompt("Ingrese su usuario: ")
+                let inputPass = prompt("Ingrese su contraseña: ")
+                for (let i = 0; i < users.length; i++) {
+                    if (users[i].username === inputUser && users[i].password === inputPass) {
+                        alert("Bienvenido a Banca en Línea")
+                        return users[i]
+                    }
+                }
+                alert("Contraseña y/o usuario incorrectos, intente nuevamente");
+            }
+        }
+
+        
+        //Función de inicio de sesión. Retorna objeto users.username/password/balance
+        let authUser = Authenticator()
+
+        function Menu() {
+            
+        }
+
+        //alert(`Bienvenido ${users[i].username}, tu balance es de ${users[i].balance} pesos`);
+
+
+    </script>
+</body>
+
+</html>

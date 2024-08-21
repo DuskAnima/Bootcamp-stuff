@@ -1,32 +1,39 @@
-##############IMPORTANTE!#################
-#preguntar si debo separar la lista con código o si lo separo manualmente
+nombres = [ #Lista de tuplas en las cuales se define profesión y nombre
+    ('mago', 'Harry Houdini'),
+    ('mago', 'David Blaine'),
+    ('mago', 'Teller'),
+    ('cientifico', 'Newton'),
+    ('cientifico', 'Hawking'),
+    ('cientifico', 'Einstein'),
+    ('otros', 'Messi'),
+    ('otros', 'Pele'),
+    ('otros', 'Juanes')
+]
 
-magos = ["Harry Houdini", "David Blaine", "Teller"]
-cientificos = ["Newton", "Hawking", "Einstein"]
-otros = ["Messi", "Pele", "Juanes"]
+def indexador(): # Módulo clasificador de profesiones
+    magos = [] # Listas que tomarán cada valor segun el resultado de las iteraciones
+    cientificos = []
+    otros = []
+    for profesion, nombre in nombres: # Al ser tuplas de dos valores, se puede acceder a cada valor remitiéndo a su posición
+        if profesion == "mago": # Condicionales que separan en función del primer valor de la tupla
+            magos.append(nombre) # Anexa a la lista el segundo valor de la tupla
+        elif profesion == "cientifico":
+            cientificos.append(nombre)
+        else:
+            otros.append(nombre)
+    return magos, cientificos, otros #indexador() retorna 3 listas, las cuales deberán ser desempaquetadas asignandoles variables.
 
 def hacer_grandioso(magos):
-    magos = [print(f"El gran {mago}")for mago in magos] #Compresión de listas para imprimir magos
+    magos = [print(f"El gran {mago}")for mago in magos] #Compresión de listas para imprimir magos.
 
-#hacer_grandioso(magos)
-
-def imprimir_nombres(magos, cientificos, otros):
-    for mago in magos: #Bucle para imprimir magos
+def imprimir_nombres():
+    magos, cientificos, otros = indexador() #Se desempaquetan 3 listas asignandoles variables para que las funciones puedan operar.
+    for mago in magos: #Bucle para imprimir magos.
         print(mago)
-    for cientifico in cientificos: #Bucle para imprimir cientificos
+    for cientifico in cientificos: #Bucle para imprimir cientificos.
         print(cientifico)
-    for otro in otros: #Bucle para imprimir otros
+    for otro in otros: #Bucle para imprimir otros.
         print(otro)
-    hacer_grandioso(magos)
+    hacer_grandioso(magos) #función que imprime los magos grandiosos.
 
-imprimir_nombres(magos, cientificos, otros)
-
-
-"""
-Y sabiendo que Harry Houdini, David Blaine y Teller son magos. Y también que Newton, Hawking y Einstein son científicos. 
-Debemos separar los nombres en tres grupos: magos, científicos y otros; y escribir una función llamada hacer_grandioso(), 
-que modifique la lista de magos añadiendo la frase 'El gran' antes del nombre de cada mago. Crear una función llamada 
-imprimir_nombres(), que imprime el nombre de cada persona de la lista.
-Finalmente, imprimir en pantalla la lista completa de nombres antes de ser modificados; luego imprimir los nombres de 
-los magos grandiosos, los nombres de los científicos, y los restantes
-"""
+imprimir_nombres()

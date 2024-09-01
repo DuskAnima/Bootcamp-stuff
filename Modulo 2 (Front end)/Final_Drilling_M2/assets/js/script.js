@@ -1,25 +1,19 @@
-document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    alert("Formulario enviado. ¡Gracias por contactarme!");
-});
+document.addEventListener('DOMContentLoaded', function () {
+    const body = document.body;
+    const gradientBg = document.createElement('div');
+    gradientBg.id = 'gradient-bg';
+    body.appendChild(gradientBg);
 
-$(document).ready(function() {
-    const token = 'iU9YZIaWMJ3yvA27Ng5SGmlC';
-    const teamId = 'animas-projects-e0066ff5'; 
-    const url = `https://api.vercel.com/v13/deployments/prj_ho13BnkHk2LU212Y5hQ7OZJATCfQ
-    ${teamId ? `?teamId=${teamId}` : ''}`;
+    body.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const gradientSize = 150; // Tamaño del radio del gradiente
 
-    $.get(url, function(data) {
-        const deployments = data.deployments;
-        const list = $('#deployment-list');
-        deployments.forEach(deployment => {
-            const listItem = $('<li>').text(`Deployment: ${deployment.name} - ${deployment.url}`);
-            list.append(listItem);
-        });
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error fetching deployments:', textStatus, errorThrown);
+        gradientBg.style.background = `radial-gradient(circle at ${mouseX}px ${mouseY}px, #00d4ff, #090979, #020024 ${gradientSize}px)`;
+        gradientBg.style.opacity = 1; // Hacer visible el fondo gradiente
+    });
+
+    body.addEventListener('mouseleave', () => {
+        gradientBg.style.opacity = 0; // Hacer invisible el fondo gradiente al salir del área
     });
 });
-
-//Vercel: iU9YZIaWMJ3yvA27Ng5SGmlC

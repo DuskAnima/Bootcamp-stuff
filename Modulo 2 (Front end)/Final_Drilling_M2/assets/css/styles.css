@@ -1,40 +1,36 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
+    background-color: #020024;
+    /* Color de fondo oscuro por defecto */
+    overflow: auto;
+    /* Asegura que la página sea scrolleable */
+    position: relative;
+    /* Para posicionar elementos en relación con el body */
+    color: #E0E0E0;
 }
 
-header {
-    background-color: #333;
-    padding: 10px 0;
-    color: white;
-    text-align: center;
+#base-bg {
+    position: relative;
+    z-index: 1;
+    /* Asegura que el contenido esté por encima del fondo */
 }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-section {
-    padding: 20px;
-    margin: 20px 0;
-}
-
-h1 {
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
+#gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Permite que el fondo sea "invisible" para clics */
+    background: radial-gradient(circle, rgba(0, 212, 255, 1) 0%, rgba(9, 9, 121, 1) 100%);
+    opacity: 0;
+    /* Por defecto es invisible */
+    z-index: 0;
+    /* Detrás del contenido */
+    transition: opacity 0.3s ease;
 }
 
 .project {

@@ -1,3 +1,5 @@
+//JS vanilla stuff
+
 document.addEventListener('DOMContentLoaded', function () {
     const body = document.body;
     const gradientBg = document.createElement('div');
@@ -17,3 +19,16 @@ document.addEventListener('DOMContentLoaded', function () {
         gradientBg.style.opacity = 0; // Hacer invisible el fondo gradiente al salir del área
     });
 });
+
+//jQuery stuff
+
+
+$('h2').click(function (e) { // Función cuando el mouse entra
+    e.preventDefault();
+    $(this).next('ul').slideDown(); // Muestra la lista ul inmediatamente después del h2
+},
+    function () { // Función cuando el mouse sale
+        $(this).next('ul').slideUp(); // Oculta la lista ul inmediatamente después del h2
+    }
+);
+

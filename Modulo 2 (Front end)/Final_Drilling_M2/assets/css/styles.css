@@ -3,18 +3,33 @@ body {
     padding: 0;
     height: 100%;
     background-color: #020024;
-    /* Color de fondo oscuro por defecto */
-    overflow: auto;
-    /* Asegura que la página sea scrolleable */
-    position: relative;
-    /* Para posicionar elementos en relación con el body */
     color: #E0E0E0;
+    overflow: auto;
+    /*Asegura que la página sea scrolleable pero que no se salga del viewport*/
+    position: relative;
+    /*Posiciona elementos en relación con el body*/
+    user-select: none;
+    /*Desactiva la selección de texto*/
+    /*Desactiva la selección de texto en navegadores*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    font-family: "Handjet", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
+    font-variation-settings:
+        "ELGR" 1,
+        "ELSH" 2;
+
 }
 
 #base-bg {
     position: relative;
     z-index: 1;
-    /* Asegura que el contenido esté por encima del fondo */
+    /*Asegura que todo el contenido esté por encima del fondo*/
 }
 
 #gradient-bg {
@@ -24,22 +39,83 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    /* Permite que el fondo sea "invisible" para clics */
+    /*Permite que el fondo sea "invisible" para clicks*/
     background: radial-gradient(circle, rgba(0, 212, 255, 1) 0%, rgba(9, 9, 121, 1) 100%);
     opacity: 0;
-    /* Por defecto es invisible */
+    /*Por defecto es invisible*/
     z-index: 0;
-    /* Detrás del contenido */
+    /*Detrás del contenido*/
     transition: opacity 0.3s ease;
 }
 
-.project {
-    margin-bottom: 20px;
+/* CSS para que cada sección ocupe el espacio completo de la pantalla */
+section {
+    height: 100vh;
+    /* Altura del 100% del viewport */
+    display: flex;
+    /* Flexbox para centrar el contenido */
+    flex-direction: column;
+    /* Alineamos los elementos hijos verticalmente */
+    justify-content: center;
+    /* Centramos verticalmente */
+    align-items: center;
+    /* Centramos horizontalmente */
+    padding: 50px;
+    /* Agrega algo de padding alrededor del contenido */
+    box-sizing: border-box;
+    /* Incluye el padding en el cálculo de altura */
+}
+
+.social-media>a>img {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(190deg);
+    /* Cambia el color del icono */
+
+}
+
+.social-media>a>img:hover {
+    filter: none;
+}
+
+@media screen and (min-width: 768px) {
+    .social-media>a>img {
+        width: 80px;
+        margin: 5px;
+        flex-direction: row;
+    }
+
+    #about {
+        margin: 200px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .social-media>a>img {
+        width: 12vw;
+        margin: 10px;
+        flex-direction: row;
+    }
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 10px 0;
+    /* Margen vertical entre elementos */
+}
+
+p{
+    font-size: 25px;
+}
+
+#tech>ul{
+    font-size: 25px;
+    display: none;
 }
 
 footer {
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0;
     background-color: #333;
     color: white;
     position: fixed;

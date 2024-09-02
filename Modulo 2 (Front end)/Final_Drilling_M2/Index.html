@@ -10,13 +10,19 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--CSS-->
     <link rel="stylesheet" href="assets/css/styles.css">
+    <!--Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Handjet&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <div id="base-bg">
-        <header class="navbar sticky-top bg-dark border-bottom border-body" data-bs-theme="dark">
+        <header class="navbar sticky-top bg-dark border-bottom border-body navbar-expand-md" data-bs-theme="dark"
+            role="navigation">
             <nav class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -25,54 +31,70 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#intro">Inicio</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#about">Sobre mí</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#tech">Habilidades</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#projects">Proyectos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
+                            <a class="nav-link" href="#contact">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
 
+        <section id="intro">
+            <h1>¡Hola, Soy Cristopher!</h1>
+            <p>Un desarrollador independiente y autodidacta</p>
+            <hr>
+            <p>Mis redes sociales</p>
+            <hr>
+            <div class="social-media">
+                <a href="#"><img src="https://img.icons8.com/?size=100&id=5tqGQHOL2jCg&format=png&color=000000"></a>
+                <a href="#"><img src="https://img.icons8.com/?size=100&id=NHuAZUgwkbJo&format=png&color=000000"></a>
+                <a href="#"><img src="https://img.icons8.com/?size=100&id=IALWhfjB37gY&format=png&color=000000"></a>
+                <a href="#"><img src="https://img.icons8.com/?size=100&id=D5XsEXNbhkMI&format=png&color=000000"></a>
+            </div>
+        </section>
+
+
         <section id="about">
             <h1>Sobre mí</h1>
-            <p>¡Hola! Soy Cristopher, un desarrollador independiente y autodidacta con mucha experiencia laboral,
-                ¡pero ninguna como desarrollador!</p> <!--insertar un meme de actitud positiva-->
-            <p>Me apasiona el arte, disfruto mucho tanto consumirlo como producirlo, bajo esta perspectiva entré a la
-                programación de manera autodidácta con la idea de llegar a desarrollar videojuegos desde un enfoque
-                artístico</p>
+            <p>Me apasiona el arte, entré a la programación de manera autodidácta con la idea de llegar a desarrollar
+                videojuegos desde un enfoque artístico.</p>
             <p>
-                Disfruto de aprender cosas nuevas, el estudio es uno de mis principales pasatiempos, es por esto que
-                poseo
-                un bagaje amplio de múltiples disciplinas, desde desde matemáticas y ciencias hasta filosofía y
-                literatura
+                Disfruto de aprender, de hecho, es uno de mis pasatiempos, es por esto que poseo un bagaje amplio de
+                múltiples disciplinas, desde matemáticas y ciencias hasta filosofía y literatura. Aprendiz de todo,
+                maestro de nada.
             </p>
+            <p>Mi objetivo es refinar mis habilidades con experiencia y llegar a ser un desarrollador de
+                videojuegos independiente. Mientras pueda seguir aprendiendo, seguiré motivado.
+            </p>
+        </section>
 
-            <h2>Habilidades técnicas</h2>
-            <h3>HTML, CSS y JavaScript</h3>
+
+        <section id="tech">
+            <h1>Habilidades técnicas</h1>
+            <h2>HTML, CSS y JavaScript</h2>
             <ul>
                 <li>Bootstrap</li>
                 <li>jQuery</li>
             </ul>
-            <h3>Python</h3>
+            <h2>Python</h2>
             <ul>
                 <li>Django</li>
             </ul>
-            <h3>Godot</h3>
+            <h2>Godot</h2>
             <ul>
                 <li>GDScript</li>
             </ul>
-
-            <h2>Objetivos y aspiraciones</h2>
-            <p>Uno de mis principales objetivos es poder refinar mis habilidades de programación desde la experiencia
-                con la finalidad de poder a llegar a ser un desarrollador de videojuegos independiente. No me mueve ni
-                el dinero ni el reconocimiento, sino la necesidad de aprender y crear cosas. Mientras pueda seguir
-                estudiando y obteniendo resultados, seguiré motivado.
-            </p>
             <h2>Eduación formal</h2>
             <ul>
                 <li>Licenciatura en literatura</li>
@@ -80,15 +102,16 @@
             </ul>
         </section>
 
+
         <section id="projects">
             <h1>Proyectos</h1>
             <div class="project">
                 <h2>Proyecto 1</h2>
                 <p>Descripción breve del proyecto.</p>
                 <div id="deployments">
-
                 </div>
             </div>
+
             <div class="project">
                 <h2>Proyecto 2</h2>
                 <p>Descripción breve del proyecto.</p>
@@ -96,16 +119,25 @@
             </div>
         </section>
 
+
         <section id="contact">
             <h1>Contacto</h1>
             <form action="#">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-                <label for="message">Mensaje:</label>
-                <textarea id="message" name="message"></textarea>
-                <button type="submit">Enviar</button>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre</label>
+                    <input type="email" class="form-control" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" rows="5"></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
             </form>
         </section>
 
@@ -114,48 +146,15 @@
         </footer>
     </div>
 
-    <!--1.- Estructura HTML (15 puntos):
-•
-Uso correcto de etiquetas semánticas.
-•
-Inclusión de encabezados, párrafos, listas u otros.
-•
-Organización lógica de la información.
-2.- Estilo CSS (15 puntos):
-•
-Uso adecuado de selectores y reglas CSS.
-•
-Diseño atractivo y coherente.
-•
-Aplicación de estilos responsivos para distintos tamaños de pantalla.
-3.- Bootstrap (15 puntos)
-•
-Integración de al menos un componente de Bootstrap.
-•
-Uso adecuado de clases y estilos de Bootstrap.
-4.- JavaScritp básico (15 puntos)
-•
-Interactividad básica (por ejemplo, efectos al hacer clic).
-•
-Manipulación del DOM para actualizar contenido dinámicamente.
-•
-Puedes utilizar JavaScript vanilla o JQuery.
+    <!--
+
 5.- Proyectos y habilidades (10 puntos)
 •
 Sección que muestra proyectos previos.
 •
 Lista de habilidades destacadas.
-6.- Formulario de contacto (15 puntos)
-•
-Inclusión de un formulario básico de contacto.
-•
-Validación básica de campos.
-7.- Creatividad y originalidad (15 puntos)
-•
-Elementos creativos que hagan destacar el portafolio.
-•
-Uso innovador de tecnologías aprendidas.-->
 
+-->
 
     <!---------------------------------------------------------------------------------------------------------------->
     <!--Bootstrap JS-->

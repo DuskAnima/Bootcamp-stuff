@@ -23,12 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
 //jQuery stuff
 
 
-$('h2').click(function (e) { // Función cuando el mouse entra
-    e.preventDefault();
-    $(this).next('ul').slideDown(); // Muestra la lista ul inmediatamente después del h2
-},
-    function () { // Función cuando el mouse sale
-        $(this).next('ul').slideUp(); // Oculta la lista ul inmediatamente después del h2
-    }
-);
+$(document).ready(function () {
+    $('#tech > h2').click(function () {
+        $(this).next('ul').slideToggle('fast'); // Despliega o contrae el ul siguiente
+        $(this).toggleClass('open'); // Añade o elimina la clase 'open' al h2 clickeado
+    });
+});
 

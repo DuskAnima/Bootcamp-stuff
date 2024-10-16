@@ -21,11 +21,14 @@ particular = Particular("Ford", "Fiesta", 4, "180", "500", 5)
 carga = Carga("Daft Trucks", "G 38", 10, 120, "1000", "20000")
 bicicleta = Bicicleta("Shimano", "MT Ranger", 2, "Carrera")
 motocicleta = Motocicleta("BMW", "F800s",2,"Deportiva","2T","Doble Viga", 21)
-
-particular.guardar()
-carga.guardar()
-bicicleta.guardar()
-motocicleta.guardar()
+"""
+particular.guardar_datos_csv()
+carga.guardar_datos_csv()
+bicicleta.guardar_datos_csv()
+motocicleta.guardar_datos_csv()
+"""
+print(motocicleta.leer_datos_csv())
+print(particular.leer_datos_csv())
 
 """
 
@@ -43,19 +46,4 @@ print("Motocicleta es instancia con relación a Motocicleta:", isinstance(motoci
 
 """
 
-def guardar(nombre_archivo, Automovil):
-    archivo = open(nombre_archivo, "w")
-    datos = [(Automovil.__class__, Automovil.__dict__)]
-    archivo_csv = csv.writer(archivo)
-    archivo_csv.writerows(datos)
-    archivo.close()
-def recuperar(nombre_archivo):
-    vehiculos = []
-    archivo = open(nombre_archivo, "r")
-    archivo_csv = csv.reader(archivo)
-    for vehiculo in archivo_csv:
-        vehiculos.append(vehiculo)
-        archivo.close()
-        return vehiculos
-    
 

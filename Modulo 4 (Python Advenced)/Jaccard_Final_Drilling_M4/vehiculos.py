@@ -7,19 +7,16 @@ class Vehiculo:
         self.n_ruedas = n_ruedas
 
     def guardar_datos_csv(self): #Método que guarda la información en un archivo CSV
-        with open("vehiculos.csv", "a") as archivo: #Crea y/o agrega nuevos elementos a la lista
+        with open("vehiculos.csv", "a", newline= '') as archivo: #Crea y/o agrega nuevos elementos a la lista
             archivo_csv = csv.writer(archivo)
             datos = [(self.__class__, self.__dict__)] #La clase se autoreferencia a sí misma para que los resultados se adapten a las caracteristicas de cada clase heredada
             archivo_csv.writerows(datos)
 
-    def leer_datos_csv(self): #Falta arreglar este método
-        vehiculos = []
+    def leer_datos_csv(self, i): #El método toma la variable 'i' (enviado desde main) para considerar la posición en la lista de cada instancia
         with open("vehiculos.csv", "r") as archivo:
             archivo_csv = csv.reader(archivo)
-            for vehiculo in archivo_csv:
-                vehiculos.append(vehiculo)
-                archivo.close()
-                return vehiculos
+            filas = list(archivo_csv) #Convierte el archivo en una lista iterable para poder acceder a su información desde los índices
+            print(filas[i]) #Imprime las filas en base a los índices.
 
 
 class Automovil(Vehiculo):

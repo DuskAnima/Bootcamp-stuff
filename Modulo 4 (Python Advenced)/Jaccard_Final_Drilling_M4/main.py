@@ -1,7 +1,7 @@
 from vehiculos import Vehiculo, Automovil, Bicicleta, Carga, Particular, Motocicleta
-import csv
 
-def instanciamiento_dinamico():
+#Primer requerimiento: Generador dinámico de instancias de Automovil que devuelve los respectivos datos.
+def instanciamiento_dinamico():  
     n_vehiculos = int(input('Cuantos vehículos desea insertar: ')) #variable que controla número de iteraciones
     instancias = [] #lista que guarda las instancias
     for vehiculo in range(n_vehiculos):
@@ -17,18 +17,21 @@ def instanciamiento_dinamico():
     for i, instancia in enumerate(instancias): #Se accede a las instancias desde su respectivo numero de lista
         print(f"\nDatos del automovil {i + 1}:", instancia.cadena()) #Se llama al método que guarda la información concatenada
 
+##########################################################################################################
+
+#Instancias entregadas en el Segundo requerimiento
 particular = Particular("Ford", "Fiesta", 4, "180", "500", 5)
 carga = Carga("Daft Trucks", "G 38", 10, 120, "1000", "20000")
 bicicleta = Bicicleta("Shimano", "MT Ranger", 2, "Carrera")
 motocicleta = Motocicleta("BMW", "F800s",2,"Deportiva","2T","Doble Viga", 21)
-"""
-particular.guardar_datos_csv()
-carga.guardar_datos_csv()
-bicicleta.guardar_datos_csv()
-motocicleta.guardar_datos_csv()
-"""
-print(motocicleta.leer_datos_csv())
-print(particular.leer_datos_csv())
+
+#Lista iterable de las instancias.
+lista_vehiculos = [particular, carga, bicicleta, motocicleta]
+
+
+
+#print(motocicleta.leer_datos_csv())
+#print(particular.leer_datos_csv())
 
 """
 
@@ -46,4 +49,17 @@ print("Motocicleta es instancia con relación a Motocicleta:", isinstance(motoci
 
 """
 
+def guardar_datos():
+    for vehiculo in lista_vehiculos: #Metodo que itera la lista de instancias.
+        vehiculo.guardar_datos_csv() #Accede al método que accede a los respectivos datos CSV
 
+def leer_datos():
+    for i, vehiculo in enumerate(lista_vehiculos):
+        vehiculo.leer_datos_csv(i) #Variable vehiculo se encarga de llamar el método de la instancia mientras envía su respectiva posición en el índice
+        
+        #Cabe destacar que esta solución depende completamente de que la cantidad de índices en la base 
+        # de datos(lista_vehiculos) y la cantidad de índices en el csv (vehiculos.csv) sea la misma
+        # o generará errores.
+
+
+leer_datos()

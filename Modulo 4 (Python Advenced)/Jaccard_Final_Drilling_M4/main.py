@@ -28,13 +28,8 @@ motocicleta = Motocicleta("BMW", "F800s",2,"Deportiva","2T","Doble Viga", 21)
 #Lista iterable de las instancias.
 lista_vehiculos = [particular, carga, bicicleta, motocicleta]
 
-
-
-#print(motocicleta.leer_datos_csv())
-#print(particular.leer_datos_csv())
-
+#Resultados de segundo requerimiento. Se encuentran comentados para evitar que saturen la consola de información.
 """
-
 print(particular.cadena())
 print(carga.cadena())
 print(bicicleta.cadena())
@@ -46,12 +41,13 @@ print("Motocicleta es instancia con relación a Vehículo Particular:", isinstan
 print("Motocicleta es instancia con relación a Vehículo de Carga:", isinstance(motocicleta, Carga))
 print("Motocicleta es instancia con relación a Bicicleta:", isinstance(motocicleta, Bicicleta))
 print("Motocicleta es instancia con relación a Motocicleta:", isinstance(motocicleta, Motocicleta))
-
 """
 
+#funciones que llaman a los métodos solicitados en el tercer requerimiento.
 def guardar_datos():
-    for vehiculo in lista_vehiculos: #Metodo que itera la lista de instancias.
-        vehiculo.guardar_datos_csv() #Accede al método que accede a los respectivos datos CSV
+    with open("vehiculos.csv", "w"): #Linea de control que borra datos y se asegura de que la ejecusión reiterada no acumulará multiples veces la misma información
+        for vehiculo in lista_vehiculos: #Metodo que itera la lista de instancias.
+            vehiculo.guardar_datos_csv() #Accede al método que accede a los respectivos datos CSV
 
 def leer_datos():
     for i, vehiculo in enumerate(lista_vehiculos):
@@ -61,5 +57,5 @@ def leer_datos():
         # de datos(lista_vehiculos) y la cantidad de índices en el csv (vehiculos.csv) sea la misma
         # o generará errores.
 
-
+guardar_datos()
 leer_datos()

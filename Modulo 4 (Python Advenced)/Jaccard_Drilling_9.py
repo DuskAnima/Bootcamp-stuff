@@ -14,6 +14,6 @@ def word_replacer(old_word, new_word):
     except Exception as error:
         print('Se ha generado un error imprevisto', type(error).__name__)
     finally:
-        print('Contenido reemplazado correctamente.')
+        print('Contenido reemplazado correctamente. ')
     
 word_replacer('informacion', 'Procesamiento') #archivos con extensión .dat no soportan tildes, así que es importante asegurarse de que el texto sea escrito sin tildes.

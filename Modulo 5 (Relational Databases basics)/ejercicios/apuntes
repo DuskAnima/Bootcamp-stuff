@@ -1,0 +1,10 @@
+El tipo de cardinalidad se representa mediante una etiqueta en el exterior de la relación,
+  respectivamente: "1:1", "1:N" y "N:M", aunque la notación depende del lenguaje utilizado, la que más
+  se usa actualmente es el unificado.
+Otra forma de expresar la cardinalidad, es situando un símbolo cerca de la línea que conecta una
+  entidad con una relación:
+    • 0: si cada instancia de la entidad no está obligada a participar en la relación.
+    • 1: si toda instancia de la entidad está obligada a participar en la relación y, además,
+      solamente lo hace una vez.
+    • “N”, “M”, o "*": si cada instancia de la entidad no está obligada a participar en la relación, y
+      puede hacerlo cualquier número de veces.

@@ -1,0 +1,60 @@
+CREATE TABLE empresa (
+	rut VARCHAR(10) CONSTRAINT empresa_pk PRIMARY KEY,
+	nombre VARCHAR(120),
+	direccion VARCHAR(120),
+	telefono VARCHAR(15),
+	correo VARCHAR(80),
+	web VARCHAR(50)
+);
+
+CREATE TABLE cliente (
+	rut VARCHAR(10) CONSTRAINT cliente_pk PRIMARY KEY,
+	nombre VARCHAR(120),
+	correo VARCHAR(80),
+	direccion VARCHAR(120),
+	celular VARCHAR(15),
+	alta CHAR(1)
+);
+
+CREATE TABLE tipo_vehiculo(
+	id_tipo_vehiculo NUMERIC(12) CONSTRAINT tipo_vehiculo_pk PRIMARY KEY,
+	nombre VARCHAR(120)
+);
+
+CREATE TABLE marca (
+	id_marca NUMERIC(12) CONSTRAINT marca_pk PRIMARY KEY,
+	nombre VARCHAR(120)
+);
+
+CREATE TABLE vehiculo(
+	id_vehiculo NUMERIC(12) CONSTRAINT vehiculo_pk PRIMARY KEY,
+	patente VARCHAR(10),
+	marcha VARCHAR(20),
+	modelo VARCHAR(20),
+	color VARCHAR(15),
+	precio NUMERIC(12),
+	frecuencia_mantencion NUMERIC(5),
+	marca_id NUMERIC(12),
+	tipo_vehiculo_id NUMERIC(12),
+	CONSTRAINT vehiculo_tipo_vehiculo_fk FOREIGN KEY (tipo_vehiculo_id) REFERENCES tipo_vehiculo(id_tipo_vehiculo),
+	CONSTRAINT vehiculo_marca_fk FOREIGN KEY (marca_id) REFERENCES marca(id_marca)
+);
+
+CREATE TABLE venta (
+	folio NUMERIC(12) CONSTRAINT venta_pk PRIMARY KEY,
+	fecha DATE,
+	monto NUMERIC(12),
+	vehiculo_id_vehiculo NUMERIC(12),
+	cliente_rut VARCHAR(12),
+	venta_id NUMERIC(12),
+	CONSTRAINT venta_vehiculo_fk FOREIGN KEY (vehiculo_id_vehiculo) REFERENCES vehiculo(id_vehiculo),
+	CONSTRAINT venta_cliente_fk FOREIGN KEY (cliente_rut) REFERENCES cliente(rut)
+);
+
+CREATE TABLE mantencion (
+	id_mantencion NUMERIC(12) CONSTRAINT mantencion_pk PRIMARY KEY,
+	fecha DATE,
+	trabajos_realizados VARCHAR(1000),
+	venta_folio NUMERIC(12),
+	CONSTRAINT mantencion_venta_fk FOREIGN KEY (venta_folio) REFERENCES venta(folio)
+);

@@ -1,0 +1,10 @@
+• Sentencias de manipulación de datos DML (Lenguaje de Manipulación de Datos).
+    o Recuperar información (SELECT).
+    o Añadir registros o filas (INSERT).
+    o Eliminar registros o filas (DELETE).
+    o Modificar registros o filas (UPDATE).
+• Sentencias de definición de datos DDL (Lenguaje de Definición de Datos).
+    o Crear objetos de base de datos (CREATE).
+    o Eliminar objetos de base de datos (DROP).
+    o Modificar objetos de base de datos (ALTER).
+    o Vacía una tabla o conjunto de tablas (TRUNCATE).

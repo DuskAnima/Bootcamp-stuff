@@ -1,0 +1,21 @@
+CREATE TABLE departamentos(
+	id INTEGER CONSTRAINT departamentos_pk PRIMARY KEY,
+	nombre VARCHAR(100),
+	ubicacion VARCHAR(100)
+);
+
+CREATE TABLE empleados(
+	id INTEGER CONSTRAINT empleados_pk PRIMARY KEY,
+	nombre VARCHAR(100),
+	puesto VARCHAR(100),
+	SALARIO NUMERIC(10,2),
+	fecha_contratacion DATE, 
+	departamento_id INTEGER,
+	CONSTRAINT departamento_id_fk FOREIGN KEY (departamento_id) REFERENCES departamentos(id)
+);
+
+ALTER TABLE empleados ADD COLUMN email VARCHAR(100);
+
+ALTER TABLE empleados RENAME TO trabajadores;
+
+DROP TABLE departamentos CASCADE;

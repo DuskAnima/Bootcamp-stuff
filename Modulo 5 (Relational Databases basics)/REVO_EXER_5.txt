@@ -1,0 +1,75 @@
+CREATE TABLE editoriales (
+	codigo SERIAL CONSTRAINT editoriales_pk PRIMARY KEY,
+	nombre VARCHAR (200)
+);
+
+CREATE TABLE libros (
+	codigo SERIAL CONSTRAINT libros_pk PRIMARY KEY,
+	titulo VARCHAR(200),
+	codigo_editorial INTEGER, 
+	CONSTRAINT codigo_editoria_fk FOREIGN KEY (codigo_editorial) REFERENCES editoriales(codigo) 
+);
+
+INSERT INTO editoriales(nombre) VALUES 
+('Anaya'),
+('Andina'),
+('S.M.')
+;
+
+INSERT INTO libros (titulo, codigo_editorial) VALUES 
+('Don Quijote de la Mancha I', 1),
+('El Principito', 2),
+('El Príncipe', 3),
+('Diplomacia', 3),
+('Don Quijote de la Mancha II', 1)
+;
+
+ALTER TABLE libros 
+ADD COLUMN autor VARCHAR (50), 
+ADD COLUMN precio NUMERIC (10)
+;
+
+UPDATE libros
+SET autor = CASE
+	WHEN titulo LIKE '%Quijote%' THEN 'Miguel de Cervantes'
+	WHEN titulo = 'El Principito' THEN 'Antoine Saint-Exupéry'
+	WHEN titulo = 'El Príncipe' THEN 'Maquiavelo'
+	WHEN titulo = 'Diplomacia' THEN 'Henry Kissinger'
+END
+	WHERE titulo LIKE '%Quijote%' OR titulo IN ('El Principito', 'El Príncipe', 'Diplomacia')
+	;
+
+UPDATE libros
+SET precio = CASE
+	WHEN titulo LIKE '%Mancha I' THEN 150
+	WHEN titulo LIKE '%Mancha I%' THEN 140
+	WHEN titulo = 'El Principito' THEN 120
+	WHEN titulo = 'El Príncipe' THEN 180
+	WHEN titulo = 'Diplomacia' THEN 170
+END
+	WHERE titulo LIKE '%Mancha I%' or titulo LIKE '%Mancha II%' OR titulo IN ('El Principito', 'El Príncipe', 'Diplomacia')
+	;
+
+INSERT INTO libros (titulo, autor, precio, codigo_editorial) VALUES
+	('El Aleph', 'Jorge Luis Borges', 150, 1),
+	('Diferencia y Repetición', 'Gilles Deleuze', 180, 3)
+	;
+
+BEGIN;
+DELETE FROM libros 
+WHERE codigo_editorial = 1;
+ROLLBACK;
+
+
+BEGIN; 
+UPDATE editoriales
+SET nombre = 'Mountain'
+WHERE nombre = 'S.M.';
+
+SAVEPOINT savepoint_1;
+
+UPDATE editoriales
+SET nombre = 'Iberlibro'
+WHERE nombre = 'Andina';
+ROLLBACK TO savepoint_1;
+COMMIT;

@@ -9,5 +9,45 @@ Otra forma de expresar la cardinalidad, es situando un símbolo cerca de la lín
     • “N”, “M”, o "*": si cada instancia de la entidad no está obligada a participar en la relación, y
       puede hacerlo cualquier número de veces.
 
+    • Como regla general (Pueden haber exepciones), en una relación de 1 a N, 1 es elemento independiente y N elemento dependiente.
+    • Esto guarda la implicancia de que el elemento dependiente (N) debe poseer las llaves foraneas (FK) de los
+      elementos independientes (1), incluso creando esto entidades débiles (Que carecen de PK, pero sus elementos se indexan con la unión
+      de 2 o más FK).
+    • Cuando se identifique una relación de muchos a muchos (N a N), lo que el esquema me está solicitando es que cree una tabla intermedia
+      para así poder evitar las redundancias. Si existe una entidad que pueda representar la relación, lo ideal es llamar a la tabla de 
+      esa manera, pero de caso contrario, se puede denominar directamente como las dos entidades para explicitar la relación.
+      • Cabe destacar que la relación de N a N es meramente teórica, porque no es algo que se de, pues se debe crear un intermediador o
+        sino, se terminaría estableciendo una referencia cíclica. 
 
-Ejemplos Sesión 2, Página 29 
+
+Comandos SQL:
+
+- show database; Muestra lista de base de datos
+- create database 'nombre_db';  Crea una nueva base de datos.
+- drop database 'nombre_db'; Elimina base de datos. >>Este proceso no se puede deshacer.<<
+- use 'nombre_db'; Accede a la base de datos para usarla.
+- create table 'nombre_tbl'; Crea una tabla. >>Requiere más argumentos para poder constituir sus columnas.<<
+    > Ejemplo de sintaxis de creación de tablas:
+      - create table tbl_land
+        > (id[nombre de la columna] int[tipo de dato] not null[declarar que es un dato obligatorio] 
+        > auto_increment[declarar que el ID debe ser autoincremental], [separar datos con comas]
+        > direccion varchar(256)[al declarar datos que no sean ID, se debe establecer un número de caractéres] not null, 
+        > area_total decimal(8,2)[En caso de ser decimal, se debe establecer la cantidad de enteros y flotantes] not null, area_sembrio decimal (8,2) not null, 
+        > primary key(`id`) [Se debe establecer la respectiva Primary Key, usualmente el ID] ) >>
+          >>> Importante: ID debe ser definido con backticks (AltGr + }) = ``
+        > Engine = InnoDB; [Fuera de la definición de la tabla, se debe declarar el motor]
+- describe 'nombre_tbl'; muestra información establecida en la tabla.
+
+Comandos PSQL:
+
+- create database 'nombre_db';  Crea una nueva base de datos.
+- drop database 'nombre_db'; Elimina base de datos. >>Este proceso no se puede deshacer.<<
+- create table 'nombre_tbl'; Crea una tabla. >>Requiere más argumentos para poder constituir sus columnas.<<
+    > Ejemplo de sintaxis de creación de tablas:
+      > create table persona (
+      > id SERIAL PRIMARY KEY [Al declarar ID con 'SERIAL PRIMARY KEY' se establece desde el comienzo que sea una PK Autoincremental],
+      > nombres VARCHAR(100) NOT NULL, [El resto es igual a SQL]
+      > apellidos VARCHAR(100) NOT NULL,
+      > telefono VARCHAR (20)
+      );
+

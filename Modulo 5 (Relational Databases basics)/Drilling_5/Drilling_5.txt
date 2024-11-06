@@ -1,0 +1,78 @@
+CREATE TABLE peliculas (
+id INTEGER CONSTRAINT peliculas_pk PRIMARY KEY,
+pelicula VARCHAR (50),
+estreno INTEGER,
+director VARCHAR(50)
+);
+
+CREATE TABLE reparto (
+id_pelicula INTEGER,
+actor VARCHAR(50),
+CONSTRAINT id_pelicula_fk FOREIGN KEY (id_pelicula) REFERENCES peliculas(id)
+);
+
+COPY peliculas FROM 'F:\dev\Bootcamp-stuff\Modulo 5 (Relational Databases basics)\Drilling_5\ApoyoCSV\peliculas.csv' WITH CSV
+;
+COPY reparto FROM 'F:\dev\Bootcamp-stuff\Modulo 5 (Relational Databases basics)\Drilling_5\ApoyoCSV\reparto.csv' WITH CSV
+;
+
+///////////////////////DOS FORMAS DE FILTRAR con relación de tablas////////////////////////////////
+
+1.- Subconsulta (consulta dentro de otra consulta estableciendo la query)
+
+SELECT actor FROM reparto WHERE id_pelicula IN (
+SELECT id FROM peliculas WHERE pelicula = 'Titanic'
+)
+;
+
+
+2.- Establecer una relación entre ambas tablas con JOIN
+
+SELECT r.actor, p.pelicula 
+FROM reparto AS r
+JOIN peliculas AS p ON r.id_pelicula = p.id
+WHERE p.pelicula = 'Titanic'
+;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SELECT director, COUNT(*) AS cantidad_de_peliculas
+FROM peliculas
+GROUP BY director
+ORDER BY MIN(id) ASC
+LIMIT 10
+;
+
+SELECT pelicula, estreno FROM peliculas
+WHERE estreno >= 1990 and estreno <= 1999
+ORDER BY estreno ASC
+;
+
+SELECT r.actor, p.pelicula
+FROM peliculas AS p
+JOIN reparto AS r
+ON p.id = r.id_pelicula
+WHERE p.estreno = (SELECT MAX(estreno) FROM peliculas)
+;
+
+BEGIN;
+
+INSERT INTO peliculas VALUES (101, 'Seven Samurai', 1954, 'Akira Kurosawa');
+
+SAVEPOINT save_point;
+
+INSERT INTO peliculas VALUES (102, 'Ikiru', 1952, 'Akira Kurosawa');
+
+ROLLBACK TO save_point;
+
+COMMIT;
+
+INSERT INTO reparto (id_pelicula, actor)
+SELECT p.id, 'Fulano Melano'
+FROM peliculas p
+WHERE p.estreno = 2001;
+
+INSERT INTO reparto (id_pelicula, actor)
+SELECT p.id, 'Joe Doe' 
+FROM peliculas p
+WHERE p.estreno = 2001;

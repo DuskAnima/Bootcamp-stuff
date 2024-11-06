@@ -49,5 +49,5 @@ Comandos PSQL:
       > nombres VARCHAR(100) NOT NULL, [El resto es igual a SQL]
       > apellidos VARCHAR(100) NOT NULL,
       > telefono VARCHAR (20)
-      );
+      ); 
 

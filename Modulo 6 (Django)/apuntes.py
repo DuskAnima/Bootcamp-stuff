@@ -24,5 +24,27 @@ TEMPLATE:
 * Es lo que el usuario visualiza.
     * En esta capa se establece el Front-End
 
+    
+Comandos para trabajar con django:
+    
+django-admin startproject (nombre de projecto)
+manage.py startapp (nombre de la app) 
+python manage.py runserver <- ejecuta servidor de desarrollo
+pip freeze > requirements.txt <- Archivo de texto para crear requerimientos establecidos en un venv
+pip install -r requirements.txt <- invoca el archivo requirements para que instale las dependencias
+
+
+
+
+makemigrations: Crea archivos de migración para los cambios en los modelos.
+migrate: Aplica las migraciones a la base de datos.
+shell: Abre una consola interactiva de Python en el entorno Django.
+dbshell: Abre la consola de la base de datos para interactuar directamente con la base de datos.
+showmigrations: Muestra el estado de las migraciones.
+dumpdata: Exporta los datos de la base de datos a un archivo.
+test: Ejecuta las pruebas automatizadas del proyecto.
+testserver: Ejecuta el servidor con la base de datos de pruebas.
+diffsettings: Muestra las diferencias entre la configuración actual y la predeterminada.
+
 
 """

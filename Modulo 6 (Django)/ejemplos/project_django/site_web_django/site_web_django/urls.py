@@ -1,5 +1,5 @@
 """
-URL configuration for site_django project.
+URL configuration for site_web_django project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -19,5 +19,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('book.urls')),
+    path('boards/', include('boards.urls')),
 ]

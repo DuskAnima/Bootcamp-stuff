@@ -1,14 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
+
+    <!--
+    IMPORTANTE
+    Django interpreta template tags pese a ser parte de comentarios, dificultando la documentación. Esta template está inservible
+    hasta borrar los comentarios.-->
     
+    <!--los elementos entre {% ... %} son llamados template tag o etiquetas de plantilla. Estos son capaces de ejecutar lógica, 
+    renderizar contenido dinámico o cargar bibliotecas personalizadas-->
+
+    {% load django_bootstrap5 %} <!--{% load %}: Carga bibliotecas de etiquetas personalizadas o integradas.-->
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+
+    <!-- Para poder utilizar bootstrap en el html primero es necesario instalarlo con pip, luego declararlo en settings.py en 
+    la sección de "installed apps". Finalmente, en el archivo HTML, lo importamos con {% load django_bootstrap5 %} (nombre de la librería),
+    junto con sus respectivos modulos (css, javascript y messages). Para que todo esto se vea aplicado, en el body es necesario escribir
+    los contenidos entre los template tags de {%block content%} y {%endblock content%}-->
+
+</head>
+
+<!--También una plantilla puede heredar de otra, para esto se usa {% extends %}-->
+
+<body>
+
+    {%block content%}
+
+<!--{% block %} / {% endblock %}: Define bloques de contenido que se pueden sobrescribir en plantillas que heredan.-->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MiSitio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <h1>
-        {{ palabra }} {{ mensaje }}
+        <!--Los elementos que están entre {{}} son llamados Template Variables o Variables de Plantilla. Estas variables
+        solo se utilizan para mostrar datos o evaluar valores imples. No ejecutan lógica ni controlan el flujo.
+        Por un lado, sirven para mostrar variables contextuales (incluyendo valores dentro de diccionarios o índices de listas).
+        Por otro lado, se puede acceder a propiedades o métodos de objetos derivados de vistas basadas en clases. 
+        Otra función util es la de usar los llamados filtros, que son similares a funciones de formateo. Por ejemplo:
+        {{ nombre|upper }} / {{ precio|floatformat:2 }}. Aunque probablemente lo mejor es hacer esto último mediante lógica,
+        es bueno tener en cuenta de que existe la posibilidad ante la necesidad.-->
+        {{ palabra }} {{ mensaje }} 
     </h1>
+
+    {%endblock content%}
 </body>
+
 </html>

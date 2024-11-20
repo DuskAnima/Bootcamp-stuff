@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('palindromo/', include('paliapp.urls'))
 ]
+
+"""
+El uso de include() (en detrimento de, por ejemplo views.palindromo) lo que hace es delegar todo el manejo de rutas a cada "urls.py"
+de cada aplicación en específico. De hacerlo de la otra manera, implicaría que, especificamente en este archivo, se manejarían todos
+los urls, pero, en caso contrario, aquí solo se manejarán los prefijos de cada ruta y luego .
+"""

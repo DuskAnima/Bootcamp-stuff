@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Plantillas</title>
+</head>
+
+<body>
+    <p>El nombre es {{ nombre.upper }} {{ apellido.upper }}</p>
+    <p>{{items.0}}</p>
+    <p>{{items.1}}</p>
+    <p>{{items.2}}</p>
+    <p>{{items.3}}</p>
+
+
+{%if items%}
+{%for item in items%}
+    <li>{{item}}</li>
+{%endfor%}
+{%else%}
+    <p>no contiene items</p>
+{%endif%}
+</body>
+
+</html>

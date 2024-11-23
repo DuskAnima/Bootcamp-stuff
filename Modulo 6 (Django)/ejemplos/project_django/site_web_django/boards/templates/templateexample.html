@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejemplo de Plantillas</title>
+    </head>
+    <body>
+        {% include 'menu.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo de Plantillas</title>
-</head>
+        {% if login %}
+            <p>Usuario logeado</p>
+            <p>El nombre es {{ nombre|title }} {{ apellido|upper }}</p>
+            <p>la hora es {{ hora }}</p>
 
-<body>
-    <p>El nombre es {{ nombre.upper }} {{ apellido.upper }}</p>
-    <p>{{items.0}}</p>
-    <p>{{items.1}}</p>
-    <p>{{items.2}}</p>
-    <p>{{items.3}}</p>
+            {% if items %}
+                {% for item in items %}
+                    <li>{{ item|first|upper }}</li>
+                {% endfor %}
+            {% else %}
+                <p>no contiene items</p>
+            {% endif %}
 
-
-{%if items%}
-{%for item in items%}
-    <li>{{item}}</li>
-{%endfor%}
-{%else%}
-    <p>no contiene items</p>
-{%endif%}
-</body>
-
-</html>
+        {% else %}
+            <p>No se encuentra logeado</p>
+        {% endif %}
+        </body>
+    </html>

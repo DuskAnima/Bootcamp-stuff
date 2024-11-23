@@ -6,15 +6,10 @@ import datetime
 #En este caso, como estamos trabajando con FBV (Function-Base Views), la clase solo es un constructor que
 #luego una función utilizará como parámetro
 class Persona(object): 
-    def __init__(self, nombre, apellido):
+    def __init__(self, nombre, apellido, login):
         self.nombre = nombre
         self.apellido = apellido
-
-def mostrar(request):
-    persona = Persona('Juan', 'Pérez')
-    items = ['Primero', 'Segundo', 'Tercero', 'Cuarto']
-    context = {'nombre' : persona.nombre, 'apellido': persona.apellido, 'items' : items}
-    return render(request, 'templateexample.html', context)
+        self.login = login 
 
 class IndexPageView(TemplateView):
     template_name = "index.html"
@@ -27,6 +22,15 @@ def obtenerFecha(request, name):
 def menuView(request):
     template_name = 'menu.html'
     return render(request, template_name)
+
+def mostrar(request):
+    persona = Persona('Juan', 'Pérez', True)
+    items = ['Primero', 'Segundo', 'Tercero', 'Cuarto']
+    hrs = datetime.datetime.now()
+    #items = []
+    context = {'nombre' : persona.nombre, 'apellido': persona.apellido, 'login' : persona.login, 'items' : items, 'hora' : hrs}
+    return render(request, 'templateexample.html', context)
+
 
 """from django.shortcuts import render
 

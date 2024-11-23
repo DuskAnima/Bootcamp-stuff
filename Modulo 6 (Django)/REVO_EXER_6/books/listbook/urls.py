@@ -1,6 +1,6 @@
-from django.urls import path, include
-from .views import #
+from django.urls import path
+from .views import mostrarLibros
 
 urlpatterns = [
-    path('', include(), name='listbooks')
+    path('', mostrarLibros, name='listbooks')
 ]

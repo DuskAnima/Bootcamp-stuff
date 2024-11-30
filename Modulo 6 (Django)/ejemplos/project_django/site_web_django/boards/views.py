@@ -1,11 +1,12 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 import datetime
+from .forms import InputForm, WidgetForm
 
 
+class Persona(object): 
 #En este caso, como estamos trabajando con FBV (Function-Base Views), la clase solo es un constructor que
 #luego una función utilizará como parámetro
-class Persona(object): 
     def __init__(self, nombre, apellido, login):
         self.nombre = nombre
         self.apellido = apellido
@@ -13,6 +14,17 @@ class Persona(object):
 
 class IndexPageView(TemplateView):
     template_name = "index.html"
+
+def datosform_view(request):
+    context = {}
+    context['form']= InputForm()
+    return render(request,'datosform.html', context)
+
+def widget_view(request):
+    context = {}
+    form = WidgetForm(request.POST or None)
+    context['form'] = form
+    return render(request, 'widget_home.html', context)
 
 def obtenerFecha(request, name):
     fechaActual = datetime.datetime.now()
@@ -32,12 +44,3 @@ def mostrar(request):
     return render(request, 'templateexample.html', context)
 
 
-"""from django.shortcuts import render
-
-# Create your views here.
-from django.http import HttpResponse
-
-def index(request):
-    return HttpResponse("Mensaje, Hola mundo.")
-
-"""

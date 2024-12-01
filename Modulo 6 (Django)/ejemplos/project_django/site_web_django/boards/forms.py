@@ -1,5 +1,6 @@
 #Librería estándar de Django
 from django import forms
+from .models import BoardsModel
 
 #Creación de un forms
 class InputForm(forms.Form):
@@ -15,3 +16,11 @@ class WidgetForm(forms.Form):
     apellido = forms.CharField()
     prioridad = forms.IntegerField()
     habilitado = forms.BooleanField()
+    date = forms.DateField(widget=forms.SelectDateWidget)
+
+#Primero se crea un Form y se le hereda forms.ModelForm
+class BoardsForm(forms.ModelForm):
+    # Luego se le especifica el modelo a utilizar
+    class Meta:
+        model = BoardsModel
+        fields = "__all__"

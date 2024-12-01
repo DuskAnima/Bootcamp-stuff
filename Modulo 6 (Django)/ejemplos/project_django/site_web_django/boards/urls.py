@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import IndexPageView, obtenerFecha, menuView, mostrar, datosform_view, widget_view
+from .views import IndexPageView, obtenerFecha, menuView, mostrar, datosform_view, widget_view, boardsform_view
 
 urlpatterns = [
     path('', IndexPageView.as_view(), name='index'),
@@ -7,5 +7,6 @@ urlpatterns = [
     path('menu/', menuView, name='menu'),
     path('mostrar/', mostrar, name='mostrar'),
     path('datosform/', datosform_view, name='datosform'),
-    path('widgetform', widget_view, name='widgetform')
+    path('widgetform', widget_view, name='widgetform'),
+    path('boardsform/', boardsform_view, name='boardsform')
 ]

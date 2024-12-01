@@ -1,7 +1,8 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 import datetime
-from .forms import InputForm, WidgetForm
+from .forms import InputForm, WidgetForm, BoardsForm
+from django.http import HttpResponseRedirect
 
 
 class Persona(object): 
@@ -15,16 +16,25 @@ class Persona(object):
 class IndexPageView(TemplateView):
     template_name = "index.html"
 
-def datosform_view(request):
+def boardsform_view(request):
     context = {}
-    context['form']= InputForm()
-    return render(request,'datosform.html', context)
+    form = BoardsForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/')
+    context['form'] = form
+    return render(request, 'datosform.html', context)
 
 def widget_view(request):
     context = {}
     form = WidgetForm(request.POST or None)
     context['form'] = form
     return render(request, 'widget_home.html', context)
+
+def datosform_view(request):
+    context = {}
+    context['form']= InputForm()
+    return render(request,'datosform.html', context)
 
 def obtenerFecha(request, name):
     fechaActual = datetime.datetime.now()

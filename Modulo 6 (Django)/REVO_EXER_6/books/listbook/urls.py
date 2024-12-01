@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import mostrarLibros
+from .views import index, mostrarLibros
 
 urlpatterns = [
-    path('', mostrarLibros, name='listbooks')
+    path('',  index, name='index'),
+    path('listbook/', mostrarLibros, name='listbook')
 ]

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_messages %}
+        {% bootstrap_javascript %}
+        
+    </head>
+    
+    <body>
+        
+        {% include 'listbook/navbar.html'%} 
+        <!--"Include" opera como "composición". "Extends" opera como "herencia".
+        En este caso, si aplicase extends, el navbar.html gestionaría sus propios estilos y los heredaría
+        directamente a este index.html, pero al utilizar include, navbar quedó subordinado a los estilos
+        de index.html. 
+        Hacer esto me permite "componer" modularmente un archivo 'base.html' para luego "heredar" todas
+        sus características a otras templates.-->
+        
+        {% block content%}
+        <h1>Bienvenidos a mi sitio de libros</h1>
+        {% endblock %}
+        
+        {% include 'listbook/footer.html' %}
+
+
+    </body>
+
+</html>

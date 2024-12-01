@@ -17,3 +17,6 @@ def mostrarLibros(request):
         lista_libros.append(libro)
     context = {'libros' : lista_libros}
     return render(request, 'listbook/listbook.html', context)
+
+def index(request):
+    return render(request, 'listbook/index.html')

@@ -1,8 +1,13 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
-import datetime
-from .forms import InputForm, WidgetForm, BoardsForm
+from django.urls import reverse
 from django.http import HttpResponseRedirect
+import datetime
+from .forms import InputForm, WidgetForm, BoardsForm, RegistroUsarioForm
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import AuthenticationForm
+
 
 
 class Persona(object): 
@@ -15,6 +20,45 @@ class Persona(object):
 
 class IndexPageView(TemplateView):
     template_name = "index.html"
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Se ha cerrado la sesión satisfactoriamente.')
+    return HttpResponseRedirect(reverse('menu'))
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f'Iniciaste sesión como {username}.')
+                return HttpResponseRedirect(reverse('menu'))
+            else:
+                messages.error(request, 'Invalido username o password')
+        else:
+            messages.error(request, 'Invalido username o password')
+    else:
+        form = AuthenticationForm()
+    return render(request=request, template_name='registration/login.html', context={'login_form' : form})
+
+def registro_view(request):
+    if request.method == 'POST':
+        form = RegistroUsarioForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Registrado Satisfactoriamente.')
+            return HttpResponseRedirect(reverse('menu'))
+        else: 
+            messages.error(request, 'Registro inválido. Algunos datos ingresados no son correctos')
+            return render(request=request, template_name='registration/registro.html', context={'register_form' : form})
+    else:
+        form = RegistroUsarioForm()
+    return render(request=request, template_name='registration/registro.html', context={'register_form' : form})
 
 def boardsform_view(request):
     context = {}

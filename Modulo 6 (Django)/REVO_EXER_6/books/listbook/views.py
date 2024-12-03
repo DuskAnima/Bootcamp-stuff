@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages # Módulo que sirve para desplegar alertas.
 from django.contrib.auth import authenticate, login, logout # métodos para sus respectivas acciones.
+from django.contrib.auth.forms import AuthenticationForm
 
 
 libros = ['Django 3 Web Development Cookbok Fourth Edition', 'Two Scoops of Django 3.x', 'El libro de Django', 'Python WEb Development with Django', 'Django for Professionals', 'Django for APIs']
@@ -31,7 +32,29 @@ def registro_view(request):
         form = RegistrarUsuarioForm() 
     return render(request, 'listbook/registration/registro.html', context = {'register_form' : form}) # El contexto se le debe pasar directamente a cada render para evitar conflictos ante las diferentes condicionales.
 
+def login_view(request):
+    if request.method == 'POST': 
+        form = AuthenticationForm(request, data=request.POST) # Consultar sobre por qué aquí los parametros son diferentes
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password) # Se hace diferente para probar el resultado
+            if user is not None:
+                login(request, user)
+                messages.info(request, f'Iniciaste sesión como {username}.')
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                messages.error(request, 'Invalido username o password')
+        else:
+            messages.error(request, 'Invalido username o password')
+    else:
+        form = AuthenticationForm()
+    return render(request=request, template_name='listbook/registration/login.html', context={'login_form' : form})
 
+def logout_view(request):
+    logout(request)
+    messages.info(request, 'Se ha cerrado la sesión satisfactoriamente.')
+    return HttpResponseRedirect(reverse('index'))
 
 def ingresarLibros(request):
     context = {}

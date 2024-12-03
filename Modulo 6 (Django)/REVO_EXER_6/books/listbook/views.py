@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from .forms import InputBookForm
+from .forms import InputBookForm, RegistrarUsuarioForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages # Módulo que sirve para desplegar alertas.
+from django.contrib.auth import authenticate, login, logout # métodos para sus respectivas acciones.
+
 
 libros = ['Django 3 Web Development Cookbok Fourth Edition', 'Two Scoops of Django 3.x', 'El libro de Django', 'Python WEb Development with Django', 'Django for Professionals', 'Django for APIs']
 autores = ['Aidas Bendoraitis', 'Daniel Feldroy', 'Adrian Holovaty', 'Jeff Forcier', 'William S. Vincent', 'William S. Vincent']
@@ -12,6 +15,23 @@ class Libros():
         self.titulo = titulo
         self. autor = autor
         self.precio = precio
+
+def registro_view(request):
+    if request.method == 'POST': # Si el cliente nos hace una petición con el método POST
+        form = RegistrarUsuarioForm(request.POST) #Instanciamos una forma, la cual usará como parametros, los datos capturados del request.
+        if form.is_valid(): # True si los datos capturados son válidos bajo las reglas definidas en los campos de formulario
+            user = form.save() # Se guarda al usuario
+            login(request, user) # Automáticamente el usuario se verá logeado.
+            messages.success(request, 'Registrado satisfactoriamente.') # Mensaje de feedback.
+            return HttpResponseRedirect(reverse('index')) # Redirecciona automáticamente a Index. Con reverse declaramos el name y no la ruta.
+        else:
+            messages.error(request, 'Registro inválido. Los datos ingresados no son correctos.') # Mensaje de feedback
+            return render(request, 'listbook/registration/registro.html', context = {'register_form' : form}) # En caso de no ser los datos válidos, la vista se volverá a renderizar.
+    else:
+        form = RegistrarUsuarioForm() 
+    return render(request, 'listbook/registration/registro.html', context = {'register_form' : form}) # El contexto se le debe pasar directamente a cada render para evitar conflictos ante las diferentes condicionales.
+
+
 
 def ingresarLibros(request):
     context = {}

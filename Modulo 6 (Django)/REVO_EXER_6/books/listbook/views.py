@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from .forms import InputBookForm, RegistrarUsuarioForm
+from .models import InputBookModel
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages # Módulo que sirve para desplegar alertas.
 from django.contrib.auth import authenticate, login, logout # métodos para sus respectivas acciones.
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import Permission
 
 
 libros = ['Django 3 Web Development Cookbok Fourth Edition', 'Two Scoops of Django 3.x', 'El libro de Django', 'Python WEb Development with Django', 'Django for Professionals', 'Django for APIs']
@@ -21,7 +24,13 @@ def registro_view(request):
     if request.method == 'POST': # Si el cliente nos hace una petición con el método POST
         form = RegistrarUsuarioForm(request.POST) #Instanciamos una forma, la cual usará como parametros, los datos capturados del request.
         if form.is_valid(): # True si los datos capturados son válidos bajo las reglas definidas en los campos de formulario
+            content_type = ContentType.objects.get_for_model(InputBookModel) # Obtenemos el modelo del cual queremos adquirir el permiso
+            development = Permission.objects.get( # Declaramos el permiso que queremos asignar
+                codename = 'development',
+                content_type = content_type
+            )
             user = form.save() # Se guarda al usuario
+            user.user_permissions.add(development) # Al usuario guardado se le asigna el respectivo permiso
             login(request, user) # Automáticamente el usuario se verá logeado.
             messages.success(request, 'Registrado satisfactoriamente.') # Mensaje de feedback.
             return HttpResponseRedirect(reverse('index')) # Redirecciona automáticamente a Index. Con reverse declaramos el name y no la ruta.
@@ -38,7 +47,7 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password) # Se hace diferente para probar el resultado
+            user = authenticate(username=username, password=password) 
             if user is not None:
                 login(request, user)
                 messages.info(request, f'Iniciaste sesión como {username}.')

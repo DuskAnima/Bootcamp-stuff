@@ -8,6 +8,11 @@ class BoardsModel(models.Model): #Se declara el modelo
     descripcion = models.TextField()
     modificado = models.DateTimeField(auto_now_add= True)
 
+    class Meta:
+        permissions = (
+            ('es_miembro_1', 'Es miembro con prioridad 1'),
+        )
     def __str__ (self):
         return self.titulo
+    
     

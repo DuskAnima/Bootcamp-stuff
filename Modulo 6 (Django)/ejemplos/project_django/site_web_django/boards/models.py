@@ -6,7 +6,9 @@ class BoardsModel(models.Model): #Se declara el modelo
     # Campos del modelo
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField()
-    modificado = models.DateTimeField(auto_now_add= True)
+    valor = models.FloatField()
+    creado = models.DateTimeField(auto_now_add= True)
+    modificado = models.DateTimeField(auto_now= True)
 
     class Meta:
         permissions = (

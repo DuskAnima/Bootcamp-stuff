@@ -11,6 +11,9 @@ class BoardsModel(models.Model): #Se declara el modelo
     modificado = models.DateTimeField(auto_now= True)
 
     class Meta:
+        verbose_name = 'tablero'
+        verbose_name_plural = 'tableros'
+        ordering = ['-creado']
         permissions = (
             ('es_miembro_1', 'Es miembro con prioridad 1'),
         )

@@ -1,13 +1,14 @@
 <html>
+
 <head>
     {%load django_bootstrap5%}
 
     {%bootstrap_css%}
-    
+
     {%bootstrap_javascript%}
-    
+
     {%bootstrap_messages%}
-    
+
     <style>
         .i-am-centered {
             margin: auto;
@@ -22,25 +23,8 @@
         <form method="POST">
             {% csrf_token %}
             <div class="form-group">
-                <label>Nombres </label>
-                {{ form.nombres }}
-            </div>
-            <div class="form-group">
-                <label>Apellidos </label>
-                {{ form.apellidos }}
-            </div>
-            <div class="form-group">
-                <label>Prioridad</label>
-                {{ form.prioridad }}
-            </div>
-            <div class="form-group">
-                <label>Contraseña:</label>
-                {{ form.contrasenna }}
-            </div>
-            <div class="form-group">
                 {{ form }}
             </div>
-
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
     </div>

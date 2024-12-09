@@ -11,7 +11,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from .models import BoardsModel
-#Mixins
+#Mixins (agregar funciones a una vista existente.)
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 

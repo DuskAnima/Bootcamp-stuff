@@ -47,8 +47,7 @@ class InputBookForm(forms.ModelForm):
         fields = '__all__'
     
     def clean_valoracion(self):
-        valoracion = self.cleaned_data.get('valoracion')
-        if valoracion < 0 or valoracion > 10000:
-            raise ValidationError('Ingrese un valor entre 0 y 10.000')
+        valoracion = self.cleaned_data['valoracion']
+        if valoracion > 10000 or valoracion < 1:
+            raise forms.ValidationError("Ingrese una valoración entre 1 y 10.000")
         return valoracion
-    

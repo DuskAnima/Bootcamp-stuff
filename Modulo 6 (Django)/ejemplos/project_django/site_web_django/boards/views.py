@@ -7,7 +7,12 @@ from .forms import InputForm, WidgetForm, BoardsForm, RegistroUsarioForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-
+# Para gestionar permisos
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+from .models import BoardsModel
+#Mixins
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class Persona(object): 
@@ -18,8 +23,10 @@ class Persona(object):
         self.apellido = apellido
         self.login = login 
 
-class IndexPageView(TemplateView):
-    template_name = "index.html"
+class IndexPageView(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
+    login_url = '/login/'
+    permission_required = 'boards.view_boardsmodel'
+    template_name = 'index.html'
 
 def logout_view(request):
     logout(request)
@@ -36,7 +43,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f'Iniciaste sesión como {username}.')
-                return HttpResponseRedirect(reverse('menu'))
+                return HttpResponseRedirect('/')
             else:
                 messages.error(request, 'Invalido username o password')
         else:
@@ -49,7 +56,16 @@ def registro_view(request):
     if request.method == 'POST':
         form = RegistroUsarioForm(request.POST)
         if form.is_valid():
+            content_type = ContentType.objects.get_for_model(BoardsModel) # Obtenemos el ContentType del modelo 
+            #(una suerte de identificador del Modelo que queremos operar)
+            es_miembro_1 = Permission.objects.get( # Asignamos a una variable el permiso que queremos otorgar, 
+            #pasándole además, el ContentType para poder identificar de esta manera tanto el nombre del permiso
+            # como el identificador del modelo que posee este permiso.
+                codename = 'es_miembro_1',
+                content_type = content_type
+            )
             user = form.save()
+            user.user_permissions.add(es_miembro_1)
             login(request, user)
             messages.success(request, 'Registrado Satisfactoriamente.')
             return HttpResponseRedirect(reverse('menu'))

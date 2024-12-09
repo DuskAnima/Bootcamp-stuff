@@ -51,3 +51,4 @@ class InputBookForm(forms.ModelForm):
         if valoracion > 10000 or valoracion < 1:
             raise forms.ValidationError("Ingrese una valoración entre 1 y 10.000")
         return valoracion
+    

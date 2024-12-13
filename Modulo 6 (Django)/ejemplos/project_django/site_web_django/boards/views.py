@@ -25,7 +25,7 @@ class Persona(object):
 
 class IndexPageView(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     login_url = '/login/'
-    permission_required = 'boards.view_boardsmodel'
+    permission_required = 'boards.view_boardsmodel', 'boards.es_miembro_1'
     template_name = 'index.html'
 
 def logout_view(request):
@@ -64,8 +64,17 @@ def registro_view(request):
                 codename = 'es_miembro_1',
                 content_type = content_type
             )
+            add_boards = Permission.objects.get(
+                codename = 'add_boardmodel',
+                content_type = content_type
+            )
+            view_boards = Permission.objects.get(
+                codename = 'view_boardmodel',
+                content_type = content_type
+            )
+            user.user_permissions.add(es_miembro_1, add_boards, view_boards)
+            user.is_staff = True
             user = form.save()
-            user.user_permissions.add(es_miembro_1)
             login(request, user)
             messages.success(request, 'Registrado Satisfactoriamente.')
             return HttpResponseRedirect(reverse('menu'))

@@ -56,6 +56,7 @@ def registro_view(request):
     if request.method == 'POST':
         form = RegistroUsarioForm(request.POST)
         if form.is_valid():
+            user = form.save()
             content_type = ContentType.objects.get_for_model(BoardsModel) # Obtenemos el ContentType del modelo 
             #(una suerte de identificador del Modelo que queremos operar)
             es_miembro_1 = Permission.objects.get( # Asignamos a una variable el permiso que queremos otorgar, 
@@ -65,11 +66,11 @@ def registro_view(request):
                 content_type = content_type
             )
             add_boards = Permission.objects.get(
-                codename = 'add_boardmodel',
+                codename = 'add_boardsmodel',
                 content_type = content_type
             )
             view_boards = Permission.objects.get(
-                codename = 'view_boardmodel',
+                codename = 'view_boardsmodel',
                 content_type = content_type
             )
             user.user_permissions.add(es_miembro_1, add_boards, view_boards)

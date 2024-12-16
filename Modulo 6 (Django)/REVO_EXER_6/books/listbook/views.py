@@ -8,11 +8,8 @@ from django.contrib.auth import authenticate, login, logout # métodos para sus 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
+from django.contrib.auth.decorators import login_required
 
-
-libros = ['Django 3 Web Development Cookbok Fourth Edition', 'Two Scoops of Django 3.x', 'El libro de Django', 'Python WEb Development with Django', 'Django for Professionals', 'Django for APIs']
-autores = ['Aidas Bendoraitis', 'Daniel Feldroy', 'Adrian Holovaty', 'Jeff Forcier', 'William S. Vincent', 'William S. Vincent']
-precio = [3250, 1570, 1400, 1375, 2100, 2540]
 
 class Libros():
     def __init__(self, titulo, autor, precio):
@@ -25,11 +22,11 @@ def registro_view(request):
         form = RegistrarUsuarioForm(request.POST) #Instanciamos una forma, la cual usará como parametros, los datos capturados del request.
         if form.is_valid(): # True si los datos capturados son válidos bajo las reglas definidas en los campos de formulario
             content_type = ContentType.objects.get_for_model(InputBookModel) # Obtenemos el modelo del cual queremos adquirir el permiso
+            user = form.save() # Se guarda al usuario
             development = Permission.objects.get( # Declaramos el permiso que queremos asignar
                 codename = 'development',
                 content_type = content_type
             )
-            user = form.save() # Se guarda al usuario
             user.user_permissions.add(development) # Al usuario guardado se le asigna el respectivo permiso
             login(request, user) # Automáticamente el usuario se verá logeado.
             messages.success(request, 'Registrado satisfactoriamente.') # Mensaje de feedback.
@@ -65,20 +62,18 @@ def logout_view(request):
     messages.info(request, 'Se ha cerrado la sesión satisfactoriamente.')
     return HttpResponseRedirect(reverse('index'))
 
+@login_required(login_url='login')
 def ingresarLibros(request):
     context = {}
     form = InputBookForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('inputbook')) #Falta declarar el nombre de la url
+        return HttpResponseRedirect(reverse('inputbook'))
     context['form'] = form
     return render(request, 'listbook/inputbook.html', context)
 
 def mostrarLibros(request):
-    lista_libros = []
-    for i in range(len(libros)):
-        libro = Libros(libros[i], autores[i], precio[i])
-        lista_libros.append(libro)
+    lista_libros = InputBookModel.objects.all()
     context = {'libros' : lista_libros}
     return render(request, 'listbook/listbook.html', context)
 

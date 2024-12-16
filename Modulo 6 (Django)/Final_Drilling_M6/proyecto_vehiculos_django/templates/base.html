@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_messages %}
+    {% bootstrap_javascript %}
+
+</head>    
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">Vehiculos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Inicio</a>
+                    </li>
+                {% if user.is_authenticated %}
+                    {% if perms.vehiculo.add_vehiculo %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vehiculoadd' %}">Agregar</a>
+                    </li>
+                    {% endif %}
+                    {% if perms.vehiculo.visualizar_catalogo and perms.vehiculo.add_vehiculo %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vehiculolist' %}">Listar</a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+                </ul>
+            </div>                       
+        </div>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Hola, {{user.username}}</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Ingresar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Registrarse</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container m-4">
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section>
+    <table class="table striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Desc.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in items %}
+            <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.titulo }}</td>
+                <td>{{ cat.descripcion }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

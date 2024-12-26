@@ -1,0 +1,40 @@
+<style>
+    table {
+        border: 1px solid black;
+        /* Borde alrededor de la tabla */
+        border-collapse: separate;
+        /* Borde de celdas separado por defecto */
+    }
+
+    td,
+    th {
+        border: 1px solid black;
+        /* Borde alrededor de cada celda */
+    }
+</style>
+
+<h1>Posts</h1>
+<table>
+    <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>slug</td>
+        <td>content</td>
+        <td>created_on</td>
+        <td>author</td>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td><a href="actualizar/{{ post.id }}">{{ post.id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.slug }}</td>
+        <td>{{ post.content }}</td>
+        <td>{{ post.created_on }}</td>
+        <td>{{ post.author }}</td>
+        <td><a href="eliminar/{{ post.id }}">eliminar</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<p>
+    <a href="agregar/">Agregar Post</a>
+</p>

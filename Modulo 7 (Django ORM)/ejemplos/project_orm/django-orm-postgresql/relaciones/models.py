@@ -5,6 +5,13 @@ class Automotriz(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class DirectorEjecutivo(models.Model):
+    automotriz = models.OneToOneField(Automotriz, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.nombre
 
 class TipoCombustible(models.Model):
     nombre = models.CharField(max_length=255)

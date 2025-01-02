@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogsite.apps.BlogsiteConfig',
     'relaciones.apps.RelacionesConfig',
+    'migraciones.apps.MigracionesConfig',
 ]
 
 MIDDLEWARE = [

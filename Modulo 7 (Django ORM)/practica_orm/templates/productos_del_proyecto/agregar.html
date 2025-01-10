@@ -1,9 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Agregar Productos {% endblock %}
+
+{% block content %}
+
 <h1>Agregar Producto</h1>
-<form method="POST">
+<form style="box-sizing: border-box;" method="POST">
     {% csrf_token %}
-    {{ form.as_p}}
+    <div class="form-row">
+        {{ form.nombre.label_tag }}
+        {{ form.nombre }}
+    </div>
+    <div class="form-row">
+        {{ form.precio.label_tag }}
+        {{ form.precio }}
+    </div>
+    <div class="form-row">
+        {{ form.descripcion.label_tag }}
+        {{ form.descripcion }}
+    </div>
+    <div class="form-row">
+        {{ form.f_vencimiento.label_tag }}
+        {{ form.f_vencimiento }}
+    </div>
     <input type="submit" value="Submit">
 </form>
+
 
 {% if form.errors %}
     <ul>
@@ -12,3 +33,5 @@
         {% endfor %}
     </ul>
 {% endif %}
+
+{% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados</title>
+</head>
+<style>
+    table {
+        border: 8px outset;
+        border-radius: 10px;
+        border-spacing: 10px;
+        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th, td{
+        padding: 5px;
+    }
+
+</style>
+<body>
+    <h2 style="text-align: center;"> Ingresar los Datos del Empleado</h2>
+    <form method="POST"> 
+        {% csrf_token %}
+        <table style="width:50%">
+            <tr>
+                <td>Id del Empleado</td>
+                <td><input type="text" maxlength="3" placeholder="Ingrese el Id del Empleado" name="emp_id"></td>
+            </tr>
+            <tr>
+                <td>Nombre del Empleado</td>
+                <td><input type="text" placeholder="Ingrese el nombre del Empleado" name="emp_nombre"></td>
+            </tr>
+            <tr>
+                <td>Correo</td>
+                <td><input type="email" placeholder="Correo del Empleado" name="emp_correo"></td>
+            </tr>
+            <tr>
+                <td>Designación</td>
+                <td><select name="emp_designacion">
+                    <option selected disabled>Seleccione la Designación</option>
+                    <option>Project Manager</option>
+                    <option>Programador</option>
+                    <option>Soporte Técnico</option>
+                    <option>Desarrollador Web</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;"><input type="submit" value="Enviar" class="btn btn-success"></td>
+            </tr>
+        </table>
+        <br><br>
+        <div class="alert alert-danger" role="alert">¿Quiere ver Información del Empleado?</div>
+        <p><a href="{% url 'mostrar-emp' %}">Ir a información del empleado--></a></p>
+    </form>
+</body>
+</html>

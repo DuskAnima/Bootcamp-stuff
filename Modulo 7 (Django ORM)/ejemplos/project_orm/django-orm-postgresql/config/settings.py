@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Local Apps
     'blogsite.apps.BlogsiteConfig',
     'relaciones.apps.RelacionesConfig',
     'migraciones.apps.MigracionesConfig',
+    'crudapp.apps.CrudappConfig',
+    'usuario.apps.UsuarioConfig',
 ]
 
 MIDDLEWARE = [

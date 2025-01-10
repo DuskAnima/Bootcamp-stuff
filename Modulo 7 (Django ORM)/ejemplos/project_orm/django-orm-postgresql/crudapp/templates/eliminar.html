@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar un Empleado</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <br><br>
+        <div class="alert alert-danger" role="alert">
+            ¿Estás seguro que deseas eliminar a "{{empleado.emp_nombre}}"?
+        </div>
+        <p>
+            <a href="{% url 'mostrar-emp'%}"><--Retornar</a>
+        </p>
+        <p>
+            <input type="submit" class="btn btn-danger" value="Confirm">
+        </p>
+    </form>
+</body>
+</html>

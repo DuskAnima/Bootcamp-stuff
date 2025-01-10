@@ -1,40 +1,29 @@
-<style>
-    table {
-        border: 1px solid black;
-        /* Borde alrededor de la tabla */
-        border-collapse: separate;
-        /* Borde de celdas separado por defecto */
-    }
+{% extends 'base.html' %}
+{% block title %} Productos {% endblock %}
 
-    td,
-    th {
-        border: 1px solid black;
-        /* Borde alrededor de cada celda */
-    }
-</style>
-
-<h1>Productos</h1>
+{% block content %}
+<h1>Información de Productos</h1>
 
 <table>
     <tr>
-        <th>id</th>
         <th>Nombre</th>
-        <th>Descripción</th>
         <th>Precio</th>
+        <th>Descripción</th>
+        <th>Vencimiento</th>
     </tr>
     {% for producto in productos %}
     <tr>
         <td>
-            {{ producto.id }}
+            {{ producto.nombre }}
         </td>
         <td>
-            {{ producto.nombre }}
+            {{ producto.precio }}
         </td>
         <td>
             {{ producto.descripcion }}
         </td>
         <td>
-            {{ producto.precio }}
+            {{ producto.f_vencimiento }}
         </td>
     </tr>
     {% endfor %}
@@ -43,3 +32,5 @@
 <p>
     <a href="agregar">Agregar producto</a>
 </p>
+
+{% endblock %}

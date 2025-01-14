@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="col-7">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary rounded-pill me-md-2 d-grid gap-2 col-2 mx-auto" type="submit"> Filtrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<div class="container">
+    <div class="row">
+        {% for usuario in usuarios %}
+        <div class="col-3 my-4"> <!-- Cada card ocupa 3 columnas (4 cards por fila) -->
+            <a href="{% url 'detalle-proveedor' usuario.email %}" class="text-decoration-none">
+                <!-- Cambia 'detalle_usuario' al nombre de tu vista -->
+                <div class="card icon-card">
+                    {% if usuario.proveedor.foto %}
+                    <!-- Si el proveedor tiene foto, mostrarla -->
+                    <img class="user-image card-img-top img-fluid" src="{{ usuario.proveedor.foto.url }}"
+                        alt="Imagen de {{ usuario.first_name }}">
+                    {% else %}
+                    <!-- Si no tiene foto, mostrar la imagen predeterminada -->
+                    <img class="user-image card-img-top img-fluid"
+                        src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Anonymous_logo.png"
+                        alt="Imagen de {{ usuario.first_name }}">
+                    {% endif %}
+                </div>
+                <h5 class="user-list text-center">
+                    {{ usuario.first_name }} {{ usuario.last_name }}
+                </h5>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

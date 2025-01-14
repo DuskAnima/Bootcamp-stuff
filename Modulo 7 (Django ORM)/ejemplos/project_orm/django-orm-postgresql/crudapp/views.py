@@ -1,7 +1,14 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import render, redirect # type: ignore
+from django.urls import reverse # type: ignore
+from django.views.generic import TemplateView # type: ignore
 from .forms import EmpleadoForm
 from .models import Empleado
+
+class InicioPageView(TemplateView):
+    template_name= 'inicio.html'
+
+class AcercaPagueView(TemplateView):
+    template_name= 'acerca-de.html'
 
 def insertar_emp(request):
     if request.method == 'POST':

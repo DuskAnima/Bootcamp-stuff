@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Iniciar Sesión</h2>
+    {{ login_form.as_p }} <!--No olvidar establecer correo como elemento de login-->
+    <button type="submit">Iniciar Sesión</button>
+</form>
+
+{% endblock %}

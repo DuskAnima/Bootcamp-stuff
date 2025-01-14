@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h2>Información de Laboratorios</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th class="display">Nombre</th>
+            <th class="display">Ciudad</th>
+            <th class="display">Pais</th>
+            <th class="display">Edit</th>
+            <th class="display">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lab in labs %}
+        <tr>
+            <td class="display">
+                {{ lab.nombre }}
+            </td>
+            <td class="display">
+                {{ lab.ciudad }}
+            </td>
+            <td class="display">
+                {{ lab.pais }}
+            </td>
+            <td class="display">
+                <a href="{% url 'editar-lab' lab.id %}">Actualizar</a><!--Actualizar-->
+            </td>
+            <td class="display">
+                <a href="{% url 'eliminar-lab' lab.id %}">Eliminar</a><!--Eliminar.     Falta integrar links que envién dinámicamente a los respectivos eliminar y actualizar-->
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>¿Información de los Laboratorios?</p>
+<a href="{% url 'insertar-lab' %}"><--Ir a la página de inicio</a> <!--Falta agregar un link a la página de inicio, que no sé cual es xd-->
+<br>
+<p>Usted a visitado esta página {{ visitas }} veces</p>
+
+        {% endblock %}

@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql', # Tipo de DB
         'NAME': 'db_practica_orm', # Nombre de DB
-        'USER': 'user_db', # Nombre de usuario
-        'PASSWORD': 'user_db', 
+        'USER': 'postgres', # Nombre de usuario
+        'PASSWORD': '123456', 
         'HOST': 'localhost', 
         'PORT': '5432'
     }

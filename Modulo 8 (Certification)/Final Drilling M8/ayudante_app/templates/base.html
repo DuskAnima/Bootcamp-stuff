@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%} {% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_messages %}
+    {% bootstrap_javascript %}
+    {% load crispy_forms_tags %}
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">Ayudante</a>
+            {% if user.is_authenticated %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'mi-cuenta' %}" class="btn btn-primary rounded-pill me-md-2" type="button">{{user.first_name}}</a>
+                <a href="{% url 'cerrar-sesion' %}" class="btn btn-danger rounded-pill" type="button">Cerrar Sesión</a>
+            </div>
+            {% else %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'crear-cuenta' %}" class="btn btn-primary rounded-pill me-md-2" type="button">Crear Cuenta</a>
+                <a href="{% url 'iniciar-sesion' %}" class="btn btn-success rounded-pill" type="button">Iniciar Sesión</a>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

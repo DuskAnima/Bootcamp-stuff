@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <br><br>
+    <div class="alert alert-danger" role="alert">
+        ¿Estás seguro de que deseas eliminar el laboratorio: {{ lab }}?
+    </div>
+    <p><a href="{% url 'mostrar-lab' %}"><-- Retornar</a></p>
+    <p>
+        <input type="submit" class="btn btn-danger" value="Confirm">
+    </p>
+</form>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="container ms-5 mt-5">
+                <div class="card user-detail-card">
+                    <img class="user-detail-image card-img-top img-fluid"
+                        src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Anonymous_logo.png"
+                        alt="Imagen de {{ usuario.first_name }}">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="container me-5 mt-5">
+                <div class="card-body">
+                    <h5 class="card-title">{{ usuario.first_name }} {{ usuario.last_name }}</h5>
+                    <p><strong>Horario de atención:</strong> {{ proveedor.horarios }}</p>
+                    <p><strong>Teléfono:</strong> {{ proveedor.telefono }}</p>
+                    <p><strong>Brindo los servicios:</strong></p>
+                    {% for servicio in servicios %}
+                    <span class="badge rounded-pill text-bg-danger">{{ servicio.nombre }}</span>
+                    {% empty %}
+                    <span>No hay servicios disponibles.</span>
+                    {% endfor %}
+                    <p><strong>Email:</strong> {{ usuario.email }}</p>
+                    <p><strong>Descripción:</strong> {{ proveedor.descripcion }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Mensajes -->
+    <div class="mt-5 d-flex flex-column align-items-center">
+        <h4>Mensajes:</h4>
+        {% if mensajes %}
+        <div class="d-flex flex-column align-items-center w-100">
+            {% for mensaje in mensajes %}
+            <div class="message-container bg-light p-3 mb-3 rounded shadow-sm w-75">
+                <p class="message-text mb-0"><strong>{{ mensaje.fecha_registro }}</strong></p>
+                <p class="message-text">{{ mensaje.mensaje }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No hay mensajes registrados para este proveedor.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
